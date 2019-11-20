@@ -1,17 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login');
@@ -19,6 +7,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'usuarios', 'middleware' => 'auth'], function(){
    Route::get('/', 'Auth\RegisterController@index');
+   Route::get('/cuenta/{id}', 'Auth\RegisterController@show')->name('cuenta');
    Route::get('/nuevo', 'Auth\RegisterController@nuevo');
    Route::post('/guardar', 'Auth\RegisterController@register');
    Route::post('/borrar/{prod}', 'Auth\RegisterController@borrar');
@@ -76,6 +65,10 @@ Route::group(['prefix' => 'clientes', 'middleware' => 'auth'], function(){
    Route::post('/borrar/{cli}', 'CustomersController@borrar');
    Route::get('/editar/{id}', 'CustomersController@editar');
    Route::post('/modificar/{id}', 'CustomersController@modificar');
+});
+
+route::get('prueba', function(){
+   dd(Auth::user());
 });
 
 

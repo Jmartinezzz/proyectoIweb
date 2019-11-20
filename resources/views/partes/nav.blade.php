@@ -42,6 +42,8 @@
           {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('cuenta', Auth::user()->id) }}"><span class="icon-user"></span> Cuenta</a>
+          <a class="dropdown-item" href="{{ route('logout') }}"><span class="icon-edit"></span> Contraseña</a>
           <a class="dropdown-item" href="{{ route('logout') }}"><span class="icon-log-out"></span> Salir</a>
         </div>
       </li>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestUsuarios;
 
 class RegisterController extends Controller
 {
@@ -56,6 +57,12 @@ class RegisterController extends Controller
         return view('users.register');
     }
 
+
+    public function show($id){        
+        $usuario =  User::where('id',$id)->where('eliminado', 0)->first();
+        return view('users.cuenta', ['usuario' => $usuario]);
+    }
+
      public function borrar(Request $request, $id){                        
         $usuario = User::find($id);        
         $usuario->eliminado = 1;
@@ -69,19 +76,27 @@ class RegisterController extends Controller
         return view('users.editar', ['usuario' => $usuario]);
     }
 
-     public function modificar(Request $request, $id){              
-        $usuario = User::find($id);
-        $usuario->tipo = $request->input('tipo');            
-        $usuario->save();
-        return redirect('usuarios')->with('message', 'usuarioModificado');
+
+     public function modificar(RequestUsuarios $request, $id){              
+        $usuario = User::findOrFail($id);
+        $usuario->name = $request->user;
+        $usuario->email = $request->correo;
+        $usuario->tipo = $request->tipo;
+        if ($usuario->save()) {
+           return redirect('usuarios')->with('message', 'usuarioModificado');
+        }else{
+            return back()->withInput();
+        }
+        
     }
+
 
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
 
