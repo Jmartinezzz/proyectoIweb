@@ -1,14 +1,22 @@
-@if (Auth::user()->tipo == 2)
-  <script>window.location="/productos";</script>
-@endif
-@extends('main')
 
-@section('title', 'Cuenta: ' . Auth::user()->name)
+@extends('main')
+@section('user', 'active')
+@section('userCuenta', 'active')
+
+@section('title', 'Cuenta: ' . ucwords(Auth::user()->name))
 
 @section('content')
 <div class="container">
     <div class="row mt-5 pt-3">
         <div class="col-md-8 col-md-offset-2">
+        	@if(session()->get('message') == 'contraModificada')
+		    <p class="alert alert-success alert-dismissible">
+		      <strong>¡Éxito!</strong>, Contraseña Modificada correctamente.
+		      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		      <span aria-hidden="true">&times;</span>
+		      </button>
+		    </p>
+		    @endif
             <div class="panel panel-default">
                 <div><p class="h1">Bienvenido {{ Auth::user()->name }}<small> - Tu información</small></p></div>
                 <div class="panel-body">
@@ -44,12 +52,18 @@
                     	</div>
                     	
                     	<div class="form-group">
-                    		<label class="text-secondary">Creación: {{ $usuario->created_at }}</label>
+                    		<label class="text-secondary">
+                    			Creación: {{ $usuario->created_at->format('M-d-Y, h:i:s A') }}
+                    			
+                    		</label><br> 
+                    		<label class="text-secondary">
+                    			Última modificación: {{ $usuario->updated_at->diffForHumans() }}
+                    		</label>
                     		
                     	</div>
                     	<div class="">
                     		<input type="submit" class="btn btn-primary" value="Modificar">
-                    		<button class="btn btn-dark">cancelar</button>
+                    		<a href="{{ route('usuarios') }}" class="btn btn-dark">cancelar</a>
                     	</div>
                     </form>
                 </div>

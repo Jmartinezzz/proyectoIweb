@@ -1,5 +1,5 @@
 @if (Auth::check())
-	<script>window.location="/productos";</script>
+	<script>window.location="productos";</script>
 @endif
 <!DOCTYPE html>
 <html lang="es">

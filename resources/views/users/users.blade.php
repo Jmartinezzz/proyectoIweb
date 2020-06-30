@@ -51,7 +51,7 @@
   			<td>{{$usuario->id}}</td>
   			<td>{{ ucwords($usuario->name) }}</td>
         <td>{{ $usuario->email }}</td>              
-        <td>{{$usuario->created_at}}</td>  		
+        <td>{{ $usuario->created_at->format('M-d-Y, h:i:s A') }}</td>  		
         <td>{!! ($usuario->tipo == 1)?'<span class="badge badge-pill badge-info">Administrador</span>':'<span class="badge badge-pill badge-success">Vendedor</span>'  !!}</td>	
   			<td>
           <a href="usuarios/editar/{{ $usuario->id }}" class="btn btn-warning btn-sm" title="Modificar"><span class="icon-pencil2"></span></a>

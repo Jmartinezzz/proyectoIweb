@@ -9,14 +9,15 @@
 
  @section('content')
   <div class="mt-5">
-  	<h1>Nuevo Empleado</h1>
+   <h1>Nuevo Empleado</h1>
     @foreach($errors->all() as $error)
       <p class="alert alert-danger alert-dismissible">{{ $error }}
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button></p>
     @endforeach
-  	 <form action="guardar" method="POST">
+        
+    <form action="guardar" method="POST">
       <input type="hidden" name="_method" value="POST">      
       {{  csrf_field() }}
       <div class="row">

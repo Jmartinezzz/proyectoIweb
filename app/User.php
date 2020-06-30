@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
+use App\Traits\DatesTranslator;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, DatesTranslator;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +28,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 }

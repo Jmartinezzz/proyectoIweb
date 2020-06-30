@@ -6,10 +6,12 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'usuarios', 'middleware' => 'auth'], function(){
-   Route::get('/', 'Auth\RegisterController@index');
+   Route::get('/', 'Auth\RegisterController@index')->name('usuarios');
    Route::get('/cuenta/{id}', 'Auth\RegisterController@show')->name('cuenta');
    Route::get('/nuevo', 'Auth\RegisterController@nuevo');
-   Route::post('/guardar', 'Auth\RegisterController@register');
+   Route::get('/cambiar_contrasena', 'Auth\RegisterController@cambiarcontra')->name('cambiarcontra');
+   Route::post('/cambiar_contrasena', 'Auth\RegisterController@guardarcambiarcontra');
+   Route::post('/guardar', 'Auth\RegisterController@guardar')->name('guardar');
    Route::post('/borrar/{prod}', 'Auth\RegisterController@borrar');
    Route::get('/editar/{id}', 'Auth\RegisterController@editar');
    Route::post('/modificar/{id}', 'Auth\RegisterController@modificar');

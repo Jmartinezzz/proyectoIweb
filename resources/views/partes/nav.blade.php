@@ -38,12 +38,12 @@
         </div>
       </li>        
       <li class="nav-item dropdown mr-5">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle @yield('user')" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ Auth::user()->name }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ route('cuenta', Auth::user()->id) }}"><span class="icon-user"></span> Cuenta</a>
-          <a class="dropdown-item" href="{{ route('logout') }}"><span class="icon-edit"></span> Contraseña</a>
+          <a class="dropdown-item @yield('userCuenta')" href="{{ route('cuenta', Auth::user()->id) }}"><span class="icon-user"></span> Cuenta</a>
+          <a class="dropdown-item @yield('userCambiarContra')" href="{{ route('cambiarcontra') }}"><span class="icon-edit"></span> Contraseña</a>
           <a class="dropdown-item" href="{{ route('logout') }}"><span class="icon-log-out"></span> Salir</a>
         </div>
       </li>

@@ -13,50 +13,41 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="h1">Registro de usuarios</div>
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                      <p class="alert alert-danger alert-dismissible">{{ $error }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button></p>
+                    @endforeach
+                @endif
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="guardar">
+                    <form class="form-horizontal" method="POST" action="{{ route('guardar') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Usuario:</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="name" type="text" class="form-control" name="user" value="{{ old('user') }}" required autofocus>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="email" class="col-md-4 control-label">E-Mail:</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="correo" value="{{ old('correo') }}" required>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="password" class="col-md-4 control-label">Password:</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
